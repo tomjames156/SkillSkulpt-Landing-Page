@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="512" height="512" aria-hidden="true">
+  <title>SkillSkulpt</title>
+  <!-- Two intertwined S's  violet and white (for use on dark backgrounds) -->
+  <path d="M 8 6 C 8 10 14 10 16 12 C 18 14 18 18 16 20 C 14 22 8 22 8 26" fill="none" stroke="#7C3AED" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 24 26 C 24 22 18 22 16 20 C 14 18 14 14 16 12 C 18 10 24 10 24 6" fill="none" stroke="#ffffff" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

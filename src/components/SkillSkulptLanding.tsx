@@ -1,9 +1,18 @@
+import { useState } from 'react';
 import { HeroSection } from './HeroSection';
 import { WaitlistForm } from './WaitlistForm';
 import { CurriculumRoadmap } from './CurriculumRoadmap';
 import { SkillSkulptLogo } from './SkillSkulptLogo';
 
+const navLinks: Array<{ href: string; label: string; primary?: boolean }> = [
+  { href: '#coach', label: 'The Coach' },
+  { href: '#curriculum', label: 'Curriculum' },
+  { href: '#waitlist', label: 'Join Waitlist', primary: true },
+];
+
 export function SkillSkulptLanding() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="ink-bleed-bg">
       {/* SVG filter for optional ink-bleed diffusion effect (artistic glass) */}
@@ -21,43 +30,80 @@ export function SkillSkulptLanding() {
         </defs>
       </svg>
 
-      {/* Sticky frosted-glass navbar */}
-      <header className="sticky top-0 z-50 border-b border-glass-border bg-glass backdrop-blur-glass">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="/" className="flex items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-white">
+      {/* Fixed frosted-glass navbar */}
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-glass-border bg-glass backdrop-blur-glass">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4" aria-label="Main">
+          <a href="/" className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-white sm:gap-2.5 sm:text-xl">
             <SkillSkulptLogo size={28} className="flex-shrink-0" />
             <span>SkillSkulpt</span>
           </a>
-          <ul className="flex items-center gap-8">
-            <li>
-              <a
-                href="#coach"
-                className="font-body text-sm font-medium text-white/80 transition-colors hover:text-white"
-              >
-                The Coach
-              </a>
-            </li>
-            <li>
-              <a
-                href="#curriculum"
-                className="font-body text-sm font-medium text-white/80 transition-colors hover:text-white"
-              >
-                Curriculum
-              </a>
-            </li>
-            <li>
-              <a
-                href="#waitlist"
-                className="inline-flex items-center rounded-full bg-white/10 px-5 py-2.5 font-body text-sm font-semibold text-white ring-1 ring-white/20 transition-all hover:bg-white/15 hover:ring-white/30 focus:outline-none focus:ring-2 focus:ring-violet focus:ring-offset-2 focus:ring-offset-surface"
-              >
-                Join Waitlist
-              </a>
-            </li>
+
+          {/* Desktop nav */}
+          <ul className="hidden items-center gap-6 md:flex md:gap-8">
+            {navLinks.map(({ href, label, primary }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className={
+                    primary
+                      ? 'inline-flex items-center rounded-full bg-white/10 px-5 py-2.5 font-body text-sm font-semibold text-white ring-1 ring-white/20 transition-all hover:bg-white/15 hover:ring-white/30 focus:outline-none focus:ring-2 focus:ring-violet focus:ring-offset-2 focus:ring-offset-surface'
+                      : 'font-body text-sm font-medium text-white/80 transition-colors hover:text-white'
+                  }
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
           </ul>
+
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((o) => !o)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-white/90 transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-violet focus:ring-offset-2 focus:ring-offset-surface md:hidden"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileMenuOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </nav>
+
+        {/* Mobile menu panel */}
+        <div
+          id="mobile-menu"
+          className={`overflow-hidden border-t border-glass-border bg-glass/95 backdrop-blur-glass transition-[max-height,opacity] duration-300 ease-out md:hidden ${mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}
+          aria-hidden={!mobileMenuOpen}
+        >
+          <ul className="flex flex-col px-4 py-4 sm:px-6">
+            {navLinks.map(({ href, label, primary }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={
+                    primary
+                      ? 'mt-2 inline-flex justify-center rounded-full bg-white/10 px-5 py-3 font-body text-sm font-semibold text-white ring-1 ring-white/20 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-violet focus:ring-offset-2 focus:ring-offset-surface'
+                      : 'block rounded-lg py-3 font-body text-base font-medium text-white/90 hover:bg-white/10 hover:text-white'
+                  }
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </header>
 
-      <main>
+      <main className="pt-14 sm:pt-16">
         <HeroSection />
 
         {/* Tech stack: AWS Rekognition & Bedrock placeholders */}
