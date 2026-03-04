@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+  <!-- Two intertwined S's  violet and dark for visibility on light browser chrome -->
+  <path d="M 8 6 C 8 10 14 10 16 12 C 18 14 18 18 16 20 C 14 22 8 22 8 26" fill="none" stroke="#7C3AED" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 24 26 C 24 22 18 22 16 20 C 14 18 14 14 16 12 C 18 10 24 10 24 6" fill="none" stroke="#1a1a1a" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
